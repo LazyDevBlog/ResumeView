@@ -31,12 +31,6 @@ class ResumeView: UIView {
     @IBOutlet weak var commentButton: UIButton!
     @IBOutlet weak var likeButton: UIButton!
     
-    //MARK: - @IBInspectable
-    @IBInspectable var mCoverImage: UIImage = UIImage() {
-        didSet {
-            self.coverImage.image = mCoverImage
-        }
-    }
     private var materialKey = false
     @IBInspectable var materialDesign: Bool {
         get {
@@ -85,6 +79,10 @@ class ResumeView: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        //UIEdgeInsetsMake(top, left, bottom, right);
+//        self.personButton.imageEdgeInsets = UIEdgeInsetsMake(8, 5, 12, 15);
+//        self.commentButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 15);
+//        self.likeButton.imageEdgeInsets = UIEdgeInsetsMake(10, 5, 10, 15);
     }
     
     func xibSetup() {
@@ -95,6 +93,7 @@ class ResumeView: UIView {
         view.autoresizingMask = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight]
         // Adding custom subview on top of our view (over any custom drawing > see note below)
         addSubview(view)
+        
     }
     
     func loadViewFromNib() -> UIView {
