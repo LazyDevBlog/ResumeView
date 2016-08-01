@@ -31,10 +31,27 @@ class ResumeView: UIView {
     @IBOutlet weak var commentButton: UIButton!
     @IBOutlet weak var likeButton: UIButton!
     
-    //MARK: - @IBInspectable
-    @IBInspectable var mCoverImage: UIImage = UIImage() {
-        didSet {
-            //self.coverImage.image = mCoverImage
+    private var materialKey = false
+    @IBInspectable var materialDesign: Bool {
+        get {
+            return materialKey
+        }
+        set {
+            materialKey = newValue
+            
+            if materialKey {
+                self.layer.masksToBounds = true
+                self.layer.cornerRadius = 5.0
+                self.layer.shadowOpacity = 0.8
+                self.layer.shadowRadius = 5.0
+                self.layer.shadowOffset = CGSizeMake(0.0, 2.0)
+                self.layer.shadowColor = UIColor(red: 157/255, green: 157/255, blue: 157/255, alpha: 1).CGColor
+            } else {
+                self.layer.cornerRadius = 0
+                self.layer.shadowOpacity = 0
+                self.layer.shadowRadius = 0
+                self.layer.shadowColor = nil
+            }
         }
     }
     
@@ -56,11 +73,16 @@ class ResumeView: UIView {
         // 1. setup any properties here
         // 2. call super.init(coder:)
         super.init(coder: aDecoder)
+        xibSetup()
         
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        //UIEdgeInsetsMake(top, left, bottom, right);
+//        self.personButton.imageEdgeInsets = UIEdgeInsetsMake(8, 5, 12, 15);
+//        self.commentButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 15);
+//        self.likeButton.imageEdgeInsets = UIEdgeInsetsMake(10, 5, 10, 15);
     }
     
     func xibSetup() {
@@ -71,6 +93,7 @@ class ResumeView: UIView {
         view.autoresizingMask = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight]
         // Adding custom subview on top of our view (over any custom drawing > see note below)
         addSubview(view)
+        
     }
     
     func loadViewFromNib() -> UIView {
